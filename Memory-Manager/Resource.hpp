@@ -12,7 +12,7 @@ private:
     T* beginning;
     T* end;
 protected:
-    void swap(Resource <int>& source){
+    void swap(Resource& source){
         std::swap(source.beginning, beginning);
         std::swap(source.end, end);
     }
@@ -21,7 +21,7 @@ public:
     Resource() = delete;
     
     // Constructor to initizlize an object with certain size
-    Resource(size_t size) : beginning(new T[size]), end(beginning + size){}
+    explicit Resource(size_t size) : beginning(new T[size]), end(beginning + size){}
     
     // Constructor to copy data from an array into a new resource
     Resource(const T* source, size_t size) : Resource(size){
@@ -49,16 +49,29 @@ public:
     }
     
     
-    T* get_begin(){
+    // Pointer to the beginning of the dynamically allocated memory
+    T* get_begin() const{
         return beginning;
     }
     
-    T* get_end(){
+    // Pointer to the end of the dynamically allocated memory
+    T* get_end() const{
         return end;
     }
     
+    // The size of the resource
     size_t size() const {
         return end - beginning;
+    }
+    
+    // Operator[]
+    T& operator[](size_t index){
+        return beginning[index];
+    }
+    
+    // Operator[] const version
+    const T& operator[](size_t index) const{
+        return beginning[index];
     }
 };
 #endif /* Resource_hpp */
