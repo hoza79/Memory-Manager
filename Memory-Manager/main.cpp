@@ -9,10 +9,17 @@ int main(int argc, const char * argv[]) {
         std::cout << *it << " ";
     }
     std::cout << "\n";
-    Resource new_res(res);
+    Resource new_res = res;
     for(auto it = new_res.get_begin(); it!= new_res.get_end(); it++){
         std::cout << *it << " ";
     }
+    Resource<int> res3(5);
+    Resource<int> res4(5);
+    std::cout << "\n";
+    res3 = res4;
+   
+    
+    
     std::cout << "\n";
 
     

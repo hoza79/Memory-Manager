@@ -11,6 +11,11 @@ class Resource{
 private:
     T* beginning;
     T* end;
+protected:
+    void swap(Resource <int>& source){
+        std::swap(source.beginning, beginning);
+        std::swap(source.end, end);
+    }
 public:
     // Default constructor
     Resource() = delete;
@@ -25,6 +30,18 @@ public:
     
     // Copy constructor
     Resource(const Resource& source) : Resource(source.beginning, source.size()){}
+    
+    // Move constructor
+    Resource(Resource&& source) : beginning(nullptr), end(nullptr){
+        swap(source);
+    }
+    
+    // Copy assignment operator
+    Resource& operator = (const Resource& source){
+        Resource copy = source;
+        swap(copy);
+        return *this;
+    }
     
     // Destructor
     ~Resource(){
